@@ -29,7 +29,7 @@ export default class Server {
 
     this.io.on('connection', (client) => {
       // Conecting client
-      socket.connectingClient(client);
+      socket.connectingClient(client, this.io);
 
       //Config user
       socket.configUser(client, this.io);
@@ -37,8 +37,11 @@ export default class Server {
       //Listen message
       socket.message(client, this.io);
 
+      //Listen get users
+      socket.getUsers(client, this.io);
+
       //Disconnect
-      socket.disconnect(client);
+      socket.disconnect(client, this.io);
     });
   }
 
